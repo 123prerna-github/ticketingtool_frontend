@@ -82,7 +82,6 @@ const Categories = ({ onSelectCategory, onCreateTicket }) => {
           </div>
         )}
         <p onClick={onCreateTicket}><Link to="/create-ticket" style={{ color: 'black' }}>CREATE A TICKET HERE</Link></p>
-        <p onClick={onCreateTicket}><Link to="/comment-ticket" style={{ color: 'black' }}>CREATE A COMMENT</Link></p>
       </div>
     </div>
   );
