@@ -88,7 +88,7 @@ const TicketForm = ({ onCreateTicket, users, labels }) => {
       }
 
       const data = await response.json();
-      alert(data.message);
+      // alert(data.message);
       if (data.success) {
         onCreateTicket(data.ticket);
         setTitle("");
