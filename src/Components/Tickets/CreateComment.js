@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CreateComment.css';
+//import './CreateComment.css';
 
 const CreateComment = ({ ticketId, onClose, onCommentAdded }) => {
   const [comment, setComment] = useState('');
