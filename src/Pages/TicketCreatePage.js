@@ -17,7 +17,6 @@ const TicketCreatePage = () => {
         <div>
             <h1>Create Ticket</h1>
             <TicketForm onCreateTicket={handleCreateTicket} users={users} />
-            {/* <h2>Created Tickets</h2> */}
             <ul>
                 {tickets.map((ticket, index) => (
                     <li key={index}>

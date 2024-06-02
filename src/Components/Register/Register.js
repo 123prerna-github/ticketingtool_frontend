@@ -37,27 +37,6 @@ const Register = ({ onRegister }) => {
     onRegisteruser({  firstName, lastName, email, password,role });
   };
 
-//     const handleRegister = (e) => {
-//         e.preventDefault();
-//         // Validate form inputs before registration
-//         if (firstName.trim() === '' || lastName.trim() === '' || email.trim() === '' || password.trim() === '') {
-//             alert('Please fill in all fields.');
-//             return;
-//         }
-
-        // Perform registration action
-        // const newUser = {
-        //     firstName,
-        //     lastName,
-        //     email,
-        //     password,
-        // };
-        // onRegister(newUser);
-        // setFirstName('');
-        // setLastName('');
-        // setEmail('');
-        // setPassword('');
-
     return (
         <div className='login-container'>
             <h2>Register</h2>

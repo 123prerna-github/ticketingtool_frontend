@@ -1,15 +1,20 @@
-import React, { useState, useMemo} from 'react';
+import React, { useState, useMemo } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import { useTable } from 'react-table';
 import 'react-tabs/style/react-tabs.css';
 import './Ticket.css';
 import UpdateTicket from './UpdateTicket';
+import CreateComment from './CreateComment'; // Import the CreateComment component
+import Comments from './Comments';
 
 const Ticket = ({ tickets, users, labels }) => {
   const [status, setStatus] = useState('Open');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTicket, setCurrentTicket] = useState(null);
-  const [ticket, setTicket] = useState(null);
+  const [isCommentModalOpen, setIsCommentModalOpen] = useState(false); // State for comment modal
+  const [ticketId, setTicketId] = useState(null);
+  const [isCommentsModalOpen, setIsCommentsModalOpen] = useState(false); // State for viewing comments modal
+
 
   const columns = useMemo(
     () => [
@@ -31,16 +36,37 @@ const Ticket = ({ tickets, users, labels }) => {
       },
       {
         Header: 'Label',
-        accessor: 'label', // Assuming ticket.label corresponds to the label value
+        accessor: 'label',
       },
-      
       {
         Header: 'Actions',
         accessor: 'actions',
         Cell: ({ row }) => (
-          <button onClick={() => handleUpdateClick(row.original)}>Update</button>
+          <div>
+            <div>
+              <button onClick={() => handleUpdateClick(row.original)}>Update</button>
+            </div>
+          </div>
         ),
       },
+      {
+        Header: 'Comments',
+        accessor: 'comments',
+        Cell: ({ row }) => (
+        
+            <div>
+              <button onClick={() => handleCommentClick(row.original)}>Add Comment</button>
+            </div>
+          
+        ),
+      },
+      {
+        Header: 'View Comments', // New column for viewing comments
+        accessor: 'viewComments',
+        Cell: ({ row }) => (
+            <button onClick={() => handleViewComments(row.original)}>View Comments</button>
+        ),
+      }, 
     ],
     []
   );
@@ -75,14 +101,46 @@ const Ticket = ({ tickets, users, labels }) => {
     const updatedTickets = tickets.map(ticket =>
       ticket._id === updatedTicket.ticketId ? { ...ticket, ...updatedTicket } : ticket
     );
-    // Assuming setTickets is available from parent or useState
   };
-
 
   const updateTicketOnPage = (updatedTicket) => {
-    // Update ticket data on the page
-    setTicket(updatedTicket);
+    setCurrentTicket(updatedTicket);
   };
+
+  const handleCommentClick = (ticket) => {
+    setCurrentTicket(ticket);
+    setIsCommentModalOpen(true);
+  };
+
+  const handleCloseCommentModal = () => {
+    setIsCommentModalOpen(false);
+    setCurrentTicket(null);
+  };
+
+  const handleCommentAdded = (newComment) => {
+    const updatedTicket = {
+      ...currentTicket,
+      comments: [...currentTicket.comments, newComment]
+    };
+    setCurrentTicket(updatedTicket);
+  };
+  const handleViewComments = (ticketId) => {
+    setTicketId(ticketId);
+    setIsCommentsModalOpen(true); // Open the view comments modal
+  };
+
+  const handleCloseCommentsModal = () => {
+    setIsCommentsModalOpen(false);
+    setTicketId(null);
+  };
+  
+
+  const handleViewComment = (comments) => {
+    setCurrentTicket((prevTicket) => ({ ...prevTicket, comments }));
+  };
+ 
+  
+
 
   return (
     <div className="ticket-container">
@@ -122,7 +180,6 @@ const Ticket = ({ tickets, users, labels }) => {
           </table>
         </TabPanel>
 
-        {/* Additional TabPanels for other statuses */}
         <TabPanel>
           <h3>Resolved Tickets</h3>
           <table {...getTableProps()} className="ticket-table">
@@ -213,11 +270,28 @@ const Ticket = ({ tickets, users, labels }) => {
           onUpdate={handleUpdate}
           users={users}
           labels={labels}
-          updateTicketOnPage={updateTicketOnPage} // Pass the function as a prop
+          updateTicketOnPage={updateTicketOnPage}
         />
       )}
-    </div> 
+
+      {isCommentModalOpen && (
+        <CreateComment
+          ticketId={currentTicket._id}
+          onClose={handleCloseCommentModal}
+          onCommentAdded={handleCommentAdded}
+        />
+      )}
+      
+{isCommentsModalOpen && (
+        <Comments
+          ticketId={ticketId}
+          onClose={handleCloseCommentsModal}
+        />
+      )}
+    </div>
   );
 };
 
 export default Ticket;
+
+

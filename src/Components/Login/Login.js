@@ -33,17 +33,8 @@ const Login = ({ onLogin }) => {
   };
   const handleSubmit = (e) =>{
     e.preventDefault();
-    // if (username.trim() === '' || password.trim() === '') {
-    //     alert('Please enter username and password.');
-    //     return;
     handleLogin({username, password});
     }
-       
-
-        // onLogin({ username, password });
-        // setUsername('');
-        // setPassword('');
-    //};
 
     return (
         <div className='login-container'>

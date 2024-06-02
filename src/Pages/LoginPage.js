@@ -7,13 +7,6 @@ const LoginPage = ({ onLogin }) => {
     const [userData, setUserData] = useState(null);
 
     const handleLogin = ({ username, password }) => {
-        // if (username === 'admin' && password === 'password') {
-        //     setIsLoggedIn(true);
-        //     setUserData({ username: 'admin' }); 
-        //     onLogin({ username: 'admin' }); 
-        // } else {
-        //     alert('Invalid username or password. Please try again.');
-        // }
     };
 
     const handleLogout = () => {

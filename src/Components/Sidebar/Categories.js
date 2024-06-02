@@ -66,7 +66,6 @@ const Categories = ({ onSelectCategory, onCreateTicket }) => {
         ))}
       </ul>
       <div>
-        {/* <link to="#" onClick={handleAddNewLabel} className="add-label-link">ADD A NEW LABEL</link> */}
         <div className='new-label'>
         <button onClick={handleAddNewLabel}>Add Label</button>
 </div>
@@ -82,6 +81,7 @@ const Categories = ({ onSelectCategory, onCreateTicket }) => {
           </div>
         )}
         <p onClick={onCreateTicket}><Link to="/create-ticket" style={{ color: 'black' }}>CREATE A TICKET HERE</Link></p>
+
       </div>
     </div>
   );
