@@ -83,7 +83,6 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
 
       const result = await response.json();
       if (result.success) {
-        alert('Ticket updated successfully');
         onUpdate(updatedTicket);
         onClose();
         // Call the function to update ticket on the page

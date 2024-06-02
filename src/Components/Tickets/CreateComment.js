@@ -22,7 +22,6 @@ const CreateComment = ({ ticketId, onClose, onCommentAdded }) => {
 
       const result = await response.json();
       if (result.success) {
-        alert('Comment added successfully');
         onCommentAdded(result.data);
         setComment('');
         onClose();
