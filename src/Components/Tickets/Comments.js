@@ -18,7 +18,7 @@ const Comments = ({ ticketId, onClose }) => {
         console.log(result.data); // Log the response data to understand its structure
         if (response.ok) {
           // Extract and format 'comment' and 'createdAt1' fields with serial numbers and new lines
-          const commentsText = result.data.map((comment, index) => 
+          const commentsText = result.data.reverse().map((comment, index) => 
             `${index + 1}. Comment: ${comment.comment}\nCreated At: ${comment.createdAt1}`
           ).join('\n\n'); // Add extra newline character for spacing
           setComments(commentsText);
