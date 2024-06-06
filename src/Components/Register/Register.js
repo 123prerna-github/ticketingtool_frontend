@@ -10,7 +10,7 @@ const Register = ({ onRegister }) => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
+    // const [role, setRole] = useState('');
     const navigate=useNavigate();
 
   const onRegisteruser=(userData)=>{                       
@@ -34,7 +34,8 @@ const Register = ({ onRegister }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegisteruser({  firstName, lastName, email, password,role });
+    // onRegisteruser({  firstName, lastName, email, password,role });
+    onRegisteruser({  firstName, lastName, email, password });
   };
 
     return (
@@ -85,7 +86,7 @@ const Register = ({ onRegister }) => {
                         required
                     />
                 </label>
-                <label>
+                {/* <label>
           Role:
           <img className='img' src={user_icon} alt=""/>
           <select
@@ -96,7 +97,7 @@ const Register = ({ onRegister }) => {
             <option value="user">user</option>
             <option value="admin">admin</option>
           </select>
-        </label>
+        </label> */}
                 <button className='button' type="submit">Register</button>
             </form>
         </div>
