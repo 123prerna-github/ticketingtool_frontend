@@ -67,6 +67,14 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { title, description, priority, status, assignTo, label } = formData;
+
+    // Check if all fields are filled
+    if (!title || !description || !priority || !status || !assignTo || !label) {
+      alert('All fields are mandatory');
+      return;
+    }
+
     const updatedTicket = {
       ticketId: ticket._id,
       ...formData,
@@ -105,15 +113,16 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
         <form onSubmit={handleSubmit}>
           <label>
             Title:
-            <input type="text" name="title" value={formData.title} onChange={handleChange} />
+            <input type="text" name="title" value={formData.title} onChange={handleChange} required />
           </label>
           <label>
             Description:
-            <textarea name="description" value={formData.description} onChange={handleChange} />
+            <textarea name="description" value={formData.description} onChange={handleChange} required />
           </label>
           <label>
             Priority:
-            <select name="priority" value={formData.priority} onChange={handleChange}>
+            <select name="priority" value={formData.priority} onChange={handleChange} required>
+              <option value="">Select Priority</option>
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -121,7 +130,8 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
           </label>
           <label>
             Status:
-            <select name="status" value={formData.status} onChange={handleChange}>
+            <select name="status" value={formData.status} onChange={handleChange} required>
+              <option value="">Select Status</option>
               <option value="Open">Open</option>
               <option value="In-Progress">In-Progress</option>
               <option value="Resolved">Resolved</option>
@@ -130,7 +140,7 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
           </label>
           <label>
             Assign To:
-            <select name="assignTo" value={formData.assignTo} onChange={handleChange}>
+            <select name="assignTo" value={formData.assignTo} onChange={handleChange} required>
               <option value="">Select User</option>
               {userList.map(user => (
                 <option key={user} value={user}>
@@ -141,7 +151,7 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
           </label>
           <label>
             Label:
-            <select name="label" value={formData.label} onChange={handleChange}>
+            <select name="label" value={formData.label} onChange={handleChange} required>
               <option value="">Select Label</option>
               {labelList.map(label => (
                 <option key={label._id} value={label.name}>{label.name}</option>
@@ -156,4 +166,3 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
 };
 
 export default UpdateTicket;
-

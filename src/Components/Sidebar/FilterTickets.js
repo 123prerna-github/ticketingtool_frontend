@@ -7,6 +7,12 @@ const FilterTickets = ({ onFilter }) => {
   const [priority, setPriority] = useState('');
 
   const handleFilter = () => {
+    // Check if at least one field is filled
+    if (!assignedTo && !startDate && !endDate && !priority) {
+      alert('Please choose at least one field to filter');
+      return;
+    }
+
     const filterCriteria = {
       assignedTo,
       startDate,
