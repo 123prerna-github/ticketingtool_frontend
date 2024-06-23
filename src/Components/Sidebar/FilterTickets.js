@@ -24,8 +24,17 @@ const FilterTickets = ({ onFilter }) => {
 
   return (
     <div className="filter-sidebar">
-      <h2>Filter Tickets</h2>
-      <label>
+            <h2
+        style={{
+          fontSize: "20px",
+          textAlign: "left",
+          padding: "10px 10px 0px 10px",
+        }}
+      >
+        Filter Tickets
+      </h2>
+      <hr></hr>
+      <label style={{textAlign:"left", marginBottom:"20px"}}>
         Assigned To:
         <input
           type="text"
@@ -33,7 +42,7 @@ const FilterTickets = ({ onFilter }) => {
           onChange={(e) => setAssignedTo(e.target.value)}
         />
       </label>
-      <label>
+      <label style={{textAlign:"left" , marginBottom:"20px"}}>
         Start Date:
         <input
           type="date"
@@ -41,7 +50,7 @@ const FilterTickets = ({ onFilter }) => {
           onChange={(e) => setStartDate(e.target.value)}
         />
       </label>
-      <label>
+      <label style={{textAlign:"left" , marginBottom:"20px"}}>
         End Date:
         <input
           type="date"
@@ -49,7 +58,7 @@ const FilterTickets = ({ onFilter }) => {
           onChange={(e) => setEndDate(e.target.value)}
         />
       </label>
-      <label>
+      <label style={{textAlign:"left" , marginBottom:"20px"}}>
         Priority:
         <select value={priority} onChange={(e) => setPriority(e.target.value)}>
           <option value="">Select Priority</option>

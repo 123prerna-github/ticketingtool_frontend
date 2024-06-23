@@ -1,15 +1,20 @@
 .ticket-container {
-  margin: 20px auto;
-  padding: 20px;
+  /* margin: 20px auto;
+  padding: 20px; */
+  margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  max-width: 900px;
-  margin-right: 9%;
+  width: 100%;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   /* overflow-y: scroll; */
 }
-
+.count{
+  padding: 3px 15px 3px 15px;
+   background-color : #007bff;
+    border-radius : 15px;
+    color:white;
+}
 .ticket-list {
   list-style-type: none;
   padding: 0;
@@ -155,7 +160,7 @@
   background-color: #c1d3de;
   padding: 10px 10px;
   display: flex;
-  justify-content:flex-end;
+  justify-content:space-between;
   align-items: center;
   color: white;
   /* width : 100%; */
@@ -208,4 +213,13 @@
   flex-direction: column;
 }
 
-
+.btn2{
+  
+    /* padding: 50px; */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    background-color: #007bff;
+    font-size: 14px;
+  color: white;
+}

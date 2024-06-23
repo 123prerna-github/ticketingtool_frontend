@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 import password_icon from '../Assets/password.png';
 import user_icon from '../Assets/user.png';
+import ticketly from '../Assets/ticketly.png'
+import suzukilogo from '../Assets/logo-suzu.svg'
 
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
@@ -10,6 +12,7 @@ const Login = ({ onLogin }) => {
     const navigate = useNavigate('');
 
     const handleLogin = (userData) => {
+      
         fetch("http://localhost:3000/login", {
         method: "POST",
         headers: {
@@ -38,11 +41,18 @@ const Login = ({ onLogin }) => {
 
     return (
         <div className='login-container'>
+                <div style={{display : "flex", justifyContent:"center", alignItems:"center", gap:"20px"
+                }}>
+                <img src={suzukilogo} alt="" width={150} style={{marginBottom:"25px"}}/>
+                <img src={ticketly} alt="" width={150} style={{marginBottom:"25px"}}/>
+                </div>
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                    User Name:
+                <label style={{gap:"20px"}}>
+                  <span className='label_clas'>
+                    Username:
                     <img src={user_icon} alt=""/>
+                    </span>
                     <input 
                     type="email" 
                     placeholder="Username"
@@ -51,9 +61,11 @@ const Login = ({ onLogin }) => {
                        required 
                        /> 
                 </label>
-                <label>
+                <label style={{gap:"20px"}}>
+                    <span className='label_clas'>
                     Password:
                     <img src={password_icon} alt=""/>
+                    </span>
                     <input 
                     type="password"
                      placeholder="Password" 
@@ -63,7 +75,9 @@ const Login = ({ onLogin }) => {
                      />
                 </label>
                 <button className='button' type="submit">Login</button>
-
+                <div className="register-link" style={{marginTop:"25px"}}>
+                     Don't have an account? <Link to="/register">Register here</Link>
+                    </div>
             </form>
         </div>
     );

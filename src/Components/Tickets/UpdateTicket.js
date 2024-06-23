@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './UpdateTicket.css';
 
-const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage }) => {
+const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage ,setupdateTicket}) => {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -95,6 +95,7 @@ const UpdateTicket = ({ ticket, isOpen, onClose, onUpdate, updateTicketOnPage })
         onClose();
         // Call the function to update ticket on the page
         updateTicketOnPage(updatedTicket);
+        setupdateTicket(prev=>!prev)
       } else {
         alert('Error updating ticket: ' + result.message);
       }

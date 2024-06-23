@@ -4,7 +4,8 @@ import './Register.css';
 import user_icon from '../Assets/user.png';
 import email_icon from '../Assets/email.jpg';
 import password_icon from '../Assets/password.png';
-
+import suzukilogo from '../Assets/logo-suzu.svg'
+import ticketly from '../Assets/ticketly.png'
 const Register = ({ onRegister }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -40,11 +41,18 @@ const Register = ({ onRegister }) => {
 
     return (
         <div className='login-container'>
+                <div style={{display : "flex", justifyContent:"center", alignItems:"center", gap:"20px"
+                }}>
+                <img src={suzukilogo} alt="" width={150} style={{marginBottom:"25px"}}/>
+                <img src={ticketly} alt="" width={150} style={{marginBottom:"25px"}}/>
+                </div>
             <h2>Register</h2>
             <form onSubmit={handleSubmit}>
-                <label>
+                <label style={{gap:"20px", justifyContent: "space-around"}}>
+                  <span className='label_clas'>
                     First Name:
                     <img src={user_icon} alt=""/>
+                    </span>
                     <input
                         type="text"
                         placeholder="First Name"
@@ -53,9 +61,11 @@ const Register = ({ onRegister }) => {
                         required
                     />
                 </label>
-                <label>
+                <label style={{gap:"20px", justifyContent: "space-around"}}>
+                <span className='label_clas'>
                     Last Name:
                     <img src={user_icon} alt=""/>
+                    </span>
                     <input
                         type="text"
                         placeholder="Last Name"
@@ -64,9 +74,11 @@ const Register = ({ onRegister }) => {
                         required
                     />
                 </label>
-                <label>
-                    Email Address:
+                <label style={{gap:"20px", justifyContent: "space-around"}}>
+                <span className='label_clas'>
+                    Email ID: 
                     <img src={email_icon} alt=""/>
+                    </span>
                     <input
                         type="email"
                         placeholder="Email"
@@ -75,9 +87,11 @@ const Register = ({ onRegister }) => {
                         required
                     />
                 </label>
-                <label>
+                <label style={{gap:"20px", justifyContent: "space-around"}}>
+                <span className='label_clas'>
                     Password:
                     <img src={password_icon} alt=""/>
+                    </span>
                     <input
                         type="password"
                         placeholder="Password"
@@ -99,6 +113,10 @@ const Register = ({ onRegister }) => {
           </select>
         </label> */}
                 <button className='button' type="submit">Register</button>
+
+                <div style={{marginTop:"25px"}}>
+                Already have an account? <Link to="/">Login here</Link>
+            </div>
             </form>
         </div>
     );

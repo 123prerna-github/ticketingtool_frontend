@@ -7,14 +7,13 @@ import UpdateTicket from './UpdateTicket';
 import CreateComment from './CreateComment'; // Import the CreateComment component
 import Comments from './Comments';
 
-const Ticket = ({ tickets, users, labels }) => {
+const Ticket = ({ tickets, users, labels ,setupdateTicket}) => {
   const [status, setStatus] = useState('Open');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTicket, setCurrentTicket] = useState(null);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false); // State for comment modal
   const [ticketId, setTicketId] = useState(null);
   const [isCommentsModalOpen, setIsCommentsModalOpen] = useState(false); // State for viewing comments modal
-
 
   const columns = useMemo(
     () => [
@@ -44,7 +43,7 @@ const Ticket = ({ tickets, users, labels }) => {
         Cell: ({ row }) => (
           <div>
             <div>
-              <button onClick={() => handleUpdateClick(row.original)}>Update</button>
+              <button onClick={() => handleUpdateClick(row.original)} className='btn2'>Update</button>
             </div>
           </div>
         ),
@@ -54,8 +53,8 @@ const Ticket = ({ tickets, users, labels }) => {
         accessor: 'comments',
         Cell: ({ row }) => (
         
-            <div>
-              <button onClick={() => handleCommentClick(row.original)}>Add Comment</button>
+            <div >
+              <button onClick={() => handleCommentClick(row.original)} className='btn2'>Add Comment</button>
             </div>
           
         ),
@@ -64,7 +63,7 @@ const Ticket = ({ tickets, users, labels }) => {
         Header: 'View Comments', // New column for viewing comments
         accessor: 'viewComments',
         Cell: ({ row }) => (
-            <button onClick={() => handleViewComments(row.original)}>View Comments</button>
+            <button onClick={() => handleViewComments(row.original)} className='btn2'>View Comments</button>
         ),
       }, 
     ],
@@ -145,12 +144,13 @@ const Ticket = ({ tickets, users, labels }) => {
   return (
     <div className="ticket-container">
       <h2>Tickets</h2>
+      <hr></hr>
       <Tabs>
         <TabList className="tabs">
-          <Tab className={`tab ${status === 'Open' ? 'active' : ''}`} onClick={() => setStatus('Open')}>Open</Tab>
-          <Tab className={`tab ${status === 'Resolved' ? 'active' : ''}`} onClick={() => setStatus('Resolved')}>Resolved</Tab>
-          <Tab className={`tab ${status === 'In-Progress' ? 'active' : ''}`} onClick={() => setStatus('In-Progress')}>In-Progress</Tab>
-          <Tab className={`tab ${status === 'Closed' ? 'active' : ''}`} onClick={() => setStatus('Closed')}>Closed</Tab>
+          <Tab className={`tab ${status === 'Open' ? 'active' : ''}`} onClick={() => setStatus('Open')}>Open <span className='count'>{tickets.filter((item)=>item.status == "Open").length}</span></Tab>
+          <Tab className={`tab ${status === 'Resolved' ? 'active' : ''}`} onClick={() => setStatus('Resolved')}>Resolved <span className='count'>{tickets.filter((item)=>item.status == "Resolved").length}</span></Tab>
+          <Tab className={`tab ${status === 'In-Progress' ? 'active' : ''}`} onClick={() => setStatus('In-Progress')}>In-Progress <span className='count'>{tickets.filter((item)=>item.status == "In-Progress").length}</span></Tab>
+          <Tab className={`tab ${status === 'Closed' ? 'active' : ''}`} onClick={() => setStatus('Closed')}>Closed <span className='count'>{tickets.filter((item)=>item.status == "Closed").length}</span></Tab>
         </TabList>
 
         <TabPanel>
@@ -166,7 +166,7 @@ const Ticket = ({ tickets, users, labels }) => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.map(row => {
+              {rows?.length >=1 ? rows.map(row => {
                 prepareRow(row);
                 return (
                   <tr {...row.getRowProps()}>
@@ -175,7 +175,7 @@ const Ticket = ({ tickets, users, labels }) => {
                     ))}
                   </tr>
                 );
-              })}
+              }) : <p>No Data Found</p>}
             </tbody>
           </table>
         </TabPanel>
@@ -193,7 +193,7 @@ const Ticket = ({ tickets, users, labels }) => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.map(row => {
+              {rows?.length>=1 ? rows.map(row => {
                 prepareRow(row);
                 return (
                   <tr {...row.getRowProps()}>
@@ -202,7 +202,7 @@ const Ticket = ({ tickets, users, labels }) => {
                     ))}
                   </tr>
                 );
-              })}
+              }) : <p>No Data Found</p>}
             </tbody>
           </table>
         </TabPanel>
@@ -220,7 +220,7 @@ const Ticket = ({ tickets, users, labels }) => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.map(row => {
+              {rows?.length >=1 ? rows.map(row => {
                 prepareRow(row);
                 return (
                   <tr {...row.getRowProps()}>
@@ -229,7 +229,7 @@ const Ticket = ({ tickets, users, labels }) => {
                     ))}
                   </tr>
                 );
-              })}
+              }) : <p>No Data Found</p>}
             </tbody>
           </table>
         </TabPanel>
@@ -247,7 +247,7 @@ const Ticket = ({ tickets, users, labels }) => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {rows.map(row => {
+              {rows?.length >=1 ? rows.map(row => {
                 prepareRow(row);
                 return (
                   <tr {...row.getRowProps()}>
@@ -256,7 +256,7 @@ const Ticket = ({ tickets, users, labels }) => {
                     ))}
                   </tr>
                 );
-              })}
+              }): <p>No Data Found</p>}
             </tbody>
           </table>
         </TabPanel>
@@ -271,6 +271,7 @@ const Ticket = ({ tickets, users, labels }) => {
           users={users}
           labels={labels}
           updateTicketOnPage={updateTicketOnPage}
+          setupdateTicket={setupdateTicket}
         />
       )}
 

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './Sidebar.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Categories = ({ onSelectCategory, onCreateTicket }) => {
   const [categories, setCategories] = useState([]);
   const [newLabel, setNewLabel] = useState('');
   const [showInput, setShowInput] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -57,8 +58,17 @@ const Categories = ({ onSelectCategory, onCreateTicket }) => {
 
   return (
     <div className="categories-sidebar">
-      <h2>Categories</h2>
-      <ul>
+      <h2
+        style={{
+          fontSize: "20px",
+          textAlign: "left",
+          padding: "10px 10px 0px 10px",
+        }}
+      >
+        Categories
+      </h2>
+      <hr></hr>
+      <ul style={{ textAlign: "left" }}>
         {categories.map((category, index) => (
           <li key={index} onClick={() => onSelectCategory(category.name)}>
             {category.name}
@@ -66,12 +76,13 @@ const Categories = ({ onSelectCategory, onCreateTicket }) => {
         ))}
       </ul>
       <div>
-        <div className='new-label'>
-        <button onClick={handleAddNewLabel}>Add Label</button>
-</div>
+        <div className="new-label">
+          <button onClick={handleAddNewLabel} className='btn1'>Add New Label</button>
+        </div>
         {showInput && (
-          <div className='new-label'>
+          <div className="new-label">
             <input
+            style={{margin :"0px 0px 10px 0px"}}
               type="text"
               value={newLabel}
               onChange={handleInputChange}
@@ -80,8 +91,12 @@ const Categories = ({ onSelectCategory, onCreateTicket }) => {
             <button onClick={handleConfirmLabel}>Confirm</button>
           </div>
         )}
-        <p onClick={onCreateTicket}><Link to="/create-ticket" style={{ color: 'black' }}>CREATE A TICKET HERE</Link></p>
-
+        <hr style={{marginTop:"20px"}}></hr>
+        <div className="new-label">
+          <button onClick={()=>{navigate('/create-ticket')}} className='btn1' style={{border:"2px dotted black"}}>
+            Create a Ticket
+          </button>
+        </div>
       </div>
     </div>
   );
